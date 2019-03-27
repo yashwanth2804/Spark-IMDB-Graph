@@ -32,7 +32,8 @@ for i in MoviesList:
         actors.append(movieCast)
         moviesCast.append(','.join(movieCast))
 
-print(actors)
+merged = list(itertools.chain(*actors))
+uniqueActors = set(merged)
 
 # Saving actos uniqe list
 with open('actorsTelugu.csv','wb') as file:
