@@ -1,6 +1,6 @@
 #### Repository
 
-https://github.com/yashwanth2804/TickerSymbol
+https://github.com/yashwanth2804/Spark-IMDB-Graph
 
 # Graph Analytics on IMDB Top 250 movies - Part 1
 
@@ -33,6 +33,7 @@ The main intention of this tutorial is to get the artists who have more shared c
      #Imdb top rated Malayalam Movies - https://www.imdb.com/india/top-rated-malayalam-movies
   ```
 - next part is to provide this url to `requests` which returns a ElementTree. So that we can perform a global XPath query against the document.
+
   ```
   pageUrl = 'https://www.imdb.com/chart/top'
   page = requests.get(pageUrl)
@@ -40,8 +41,11 @@ The main intention of this tutorial is to get the artists who have more shared c
   MoviesList = tree.xpath('//td[@class="titleColumn"]') #[<Element td at 0x7f4a175decb0>, <Element td at 0x7f4a175ded08>,....]
 
   ```
+
   ![](https://cdn.steemitimages.com/DQmfATtTyqZyea9VHP7VwRmcov1YzvhR63WR547LKixYYJg/titleColumn-part1.png)
-    *Fig - selecting titleCoumn element for every table row*
+  _Fig - selecting titleCoumn element for every table row_
+
+  ```
 
   ```
 
