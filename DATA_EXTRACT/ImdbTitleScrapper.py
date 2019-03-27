@@ -3,7 +3,7 @@ import itertools
 from lxml import html
 import requests
 
-#from cast1 import getCast
+from ImdbCastScrapper import getCast
  
 
 #Imdb top 250 -  https://www.imdb.com/chart/top
@@ -15,20 +15,38 @@ import requests
 
 pageUrl = 'https://www.imdb.com/chart/top'
 page = requests.get(pageUrl)
-tree = html.fromstring(page.content)
-
+tree = html.fromstring(page.content) #
+print(type(tree)) 
 actors =[] 
 moviesCast=[]
 MoviesList = tree.xpath('//td[@class="titleColumn"]')
-MoviesList = MoviesList[:2]
+#[<Element td at 0x7f4a175decb0>, <Element td at 0x7f4a175ded08>, .....]
+MoviesList = MoviesList[:1]
 
 for i in MoviesList:
         title_url = i.xpath('./a/@href')
+        #['/title/tt0111161/?pf_rd_m=A2FGELUUNOQJNL&pf_rd_p=e31d89dd-322d-4646-8962-327b42fe94b1&pf_rd_r=BMDRYPWSQ8BK0T38TWB2&pf_rd_s=center-1&pf_rd_t=15506&pf_rd_i=top&ref_=chttp_tt_1']
         str1 = ''.join(title_url)
         title = str1.split("/")[2] #prints tt0111161 -movie title 
-        #movieCast = getCast(title)
-        #actors.append(movieCast)
-        #moviesCast.append(','.join(movieCast))
+        movieCast = getCast(title)
+        actors.append(movieCast)
+        moviesCast.append(','.join(movieCast))
+
+print(actors)
+
+# Saving actos uniqe list
+with open('actorsTelugu.csv','wb') as file:
+    for line in uniqueActors:
+        file.write(line)
+        file.write('\n')
+
+file.close()
 
 
+# Saving MovieCasts uniqe list
+with open('castsTelugu.csv','wb') as file1:
+    for line in moviesCast:
+        file1.write(line)
+        file1.write('\n')
 
+file1.close()
